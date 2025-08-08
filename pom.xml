@@ -13,8 +13,9 @@
     </parent>
 
     <groupId>com.example</groupId>
-    <artifactId>simple-hello</artifactId>
+    <artifactId>simple-hello-Sapna</artifactId> <!-- Changed here -->
     <version>1.0.0</version>
+    <name>simple-hello-Sapna</name> <!-- Added this so Sonar shows correct name -->
 
     <properties>
         <java.version>17</java.version>
