@@ -25,8 +25,11 @@ pipeline {
         stage('Deploy to App Server') {
             steps {
                 sshagent(['app-server-key']) {
-                    scp target/simple-hello-Sapna-1.0.0.jar ubuntu@13.39.159.254:/home/ubuntu/
-                    sh 'ssh ubuntu@your-server "java -jar /home/ubuntu/simple-hello-Sapna-1.0.0.jar &"'
+                    // SCP the jar to the server
+                    sh "scp target/simple-hello-Sapna-1.0.0.jar ${APP_USER}@${APP_SERVER}:/home/ubuntu/"
+                    
+                    // Run the jar on the remote server
+                    sh "ssh ${APP_USER}@${APP_SERVER} 'nohup java -jar /home/ubuntu/simple-hello-Sapna-1.0.0.jar > /home/ubuntu/app.log 2>&1 &'"
                 }
             }
         }
