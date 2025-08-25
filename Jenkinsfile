@@ -25,10 +25,8 @@ pipeline {
         stage('Deploy to App Server') {
             steps {
                 sshagent(['app-server-key']) {
-                    sh """
-                        scp -o StrictHostKeyChecking=no target/*.jar $APP_USER@$APP_SERVER:/home/$APP_USER/app.jar
-                        ssh -o StrictHostKeyChecking=no $APP_USER@$APP_SERVER "pkill -f app.jar || true; nohup java -jar /home/$APP_USER/app.jar > /home/$APP_USER/app.log 2>&1 &"
-                    """
+                    sh 'scp target/simple-hello-Sapna-1.0.0.jar ubuntu@your-server:/home/ubuntu/'
+                    sh 'ssh ubuntu@your-server "java -jar /home/ubuntu/simple-hello-Sapna-1.0.0.jar &"'
                 }
             }
         }
