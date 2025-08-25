@@ -25,7 +25,7 @@ pipeline {
         stage('Deploy to App Server') {
             steps {
                 sshagent(['app-server-key']) {
-                    sh 'scp target/simple-hello-Sapna-1.0.0.jar ubuntu@13.39.159.254/:/home/ubuntu/'
+                    scp target/simple-hello-Sapna-1.0.0.jar ubuntu@13.39.159.254:/home/ubuntu/
                     sh 'ssh ubuntu@your-server "java -jar /home/ubuntu/simple-hello-Sapna-1.0.0.jar &"'
                 }
             }
